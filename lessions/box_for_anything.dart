@@ -1,0 +1,3 @@
+class BoxForAnything{
+    dynamic content;
+}

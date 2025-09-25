@@ -1,0 +1,34 @@
+{
+  "roots": [
+    "learn_code"
+  ],
+  "packages": [
+    {
+      "name": "learn_code",
+      "version": "0.0.0",
+      "dependencies": [
+        "logger",
+        "path"
+      ],
+      "devDependencies": []
+    },
+    {
+      "name": "logger",
+      "version": "2.6.1",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
+      "dependencies": []
+    },
+    {
+      "name": "meta",
+      "version": "1.17.0",
+      "dependencies": []
+    }
+  ],
+  "configVersion": 1
+}

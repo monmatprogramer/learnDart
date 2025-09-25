@@ -1,0 +1,7 @@
+name: learn_code
+
+environment:
+  sdk: "^3.8.0"
+dependencies:
+  path: ^1.9.1
+  logger: ^2.6.1
