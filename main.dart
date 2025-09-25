@@ -6,6 +6,7 @@ import 'lessions/author.dart';
 import 'lessions/book.dart';
 import 'lessions/car.dart';
 import 'lessions/engine.dart';
+import 'lessions/music.dart';
 import 'lessions/order.dart';
 import 'lessions/person.dart';
 import 'lessions/monk.dart';
@@ -39,8 +40,22 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  calltTotalPrduce();
+  callMusic();
 
+}
+
+// Learn about factory fromMap
+// callMusic class
+void callMusic(){
+  // create a map
+  const Map<String,dynamic> musicA = {
+    'title': 'MusicA',
+    'singBy': 'singer A'
+  };
+  // create object music
+  Music music = Music.fromMap(musicA);
+  print(music.title);
+  print(music.singBy);
 }
 
 // return chain result
