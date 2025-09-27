@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'package:logger/logger.dart';
 import 'dart:io';
 import 'lessions/address.dart';
 import 'lessions/author.dart';
@@ -13,9 +12,8 @@ import 'lessions/monk.dart';
 import 'lessions/product.dart';
 import 'lessions/school.dart';
 import 'lessions/student.dart';
+import 'lessions/logger.dart';
 
-
-var _logger = Logger(printer: PrettyPrinter());
 
 //Initialized constructor
 class Error {
@@ -33,15 +31,14 @@ int sum(dynamic num1, dynamic num2) {
   try {
     return num1 + num2;
   } catch (e, s) {
-    _logger.d("Hello");
     print("🌳s: $s");
     return 0;
   }
 }
 
 void main() async {
-  callMusic();
-
+  Logger logger = Logger.instance;
+  logger.log("Hello world");
 }
 
 // Learn about factory fromMap
