@@ -4,6 +4,7 @@ import 'lessions/address.dart';
 import 'lessions/author.dart';
 import 'lessions/book.dart';
 import 'lessions/car.dart';
+import 'lessions/config_manager.dart';
 import 'lessions/engine.dart';
 import 'lessions/music.dart';
 import 'lessions/order.dart';
@@ -36,9 +37,11 @@ int sum(dynamic num1, dynamic num2) {
   }
 }
 
-void main() async {
-  Logger logger = Logger.instance;
-  logger.log("Hello world");
+void main() {
+    ConfigManager configManager = ConfigManager.instance;
+    configManager.setName("Mon Mat");
+    print(configManager.name);
+
 }
 
 // Learn about factory fromMap
