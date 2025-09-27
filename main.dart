@@ -39,9 +39,7 @@ int sum(dynamic num1, dynamic num2) {
 
 void main() {
     ConfigManager configManager = ConfigManager.instance;
-    configManager.setName("Mon Mat");
-    print(configManager.name);
-
+    configManager.setConfig("Key","Value");
 }
 
 // Learn about factory fromMap
