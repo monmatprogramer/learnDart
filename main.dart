@@ -38,8 +38,7 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() {
-    ConfigManager configManager = ConfigManager.instance;
-    configManager.setConfig("Key","Value");
+  ConfigManager.instance.welcomeUser("John");
 }
 
 // Learn about factory fromMap

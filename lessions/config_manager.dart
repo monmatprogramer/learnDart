@@ -1,18 +1,15 @@
 class ConfigManager {
-    Map<String,dynamic> _connectConf = Map();
+    static const String appName = "Super Shop";
 
     ConfigManager._();
 
     static final ConfigManager instance = ConfigManager._();
 
 
-    // Set configuration
-    void setConfig(String key, String value){
-         print(key);
-        // _connectConf[$key] = $value;
+
+    void welcomeUser(String username){
+        print("App Name: $appName");
+        print("Wecome back, $username!");
     }
-
-    // Get configuratio
-
 
 }
