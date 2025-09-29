@@ -5,3 +5,4 @@ environment:
 dependencies:
   path: ^1.9.1
   logger: ^2.6.1
+  intl: ^0.20.2

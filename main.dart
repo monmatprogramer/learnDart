@@ -39,6 +39,11 @@ int sum(dynamic num1, dynamic num2) {
 
 void main() {
   ConfigManager.instance.welcomeUser("John");
+
+  ConfigManager.instance.log("User opened Home Page");
+  ConfigManager.instance.log("User clicked Buy Now");
+  ConfigManager.instance.log("API call success");
+
 }
 
 // Learn about factory fromMap
