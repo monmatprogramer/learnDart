@@ -8,7 +8,7 @@ class ConfigManager {
 
     // Set configuration
     void setConfig(String key, String value){
-     //   print($key);
+         print(key);
         // _connectConf[$key] = $value;
     }
 
