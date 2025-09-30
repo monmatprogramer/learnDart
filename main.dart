@@ -13,7 +13,6 @@ import 'lessions/monk.dart';
 import 'lessions/product.dart';
 import 'lessions/school.dart';
 import 'lessions/student.dart';
-import 'lessions/logger.dart';
 
 
 //Initialized constructor
@@ -38,12 +37,7 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() {
-  ConfigManager.instance.welcomeUser("John");
-
-  ConfigManager.instance.log("User opened Home Page");
-  ConfigManager.instance.log("User clicked Buy Now");
-  ConfigManager.instance.log("API call success");
-
+  ConfigManager.instance.translate("zh");
 }
 
 // Learn about factory fromMap
