@@ -37,7 +37,26 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() {
-  ConfigManager.instance.translate("zh");
+  menu();
+  // ConfigManager.instance.translate("zh");
+}
+// Learn singleton
+// 1. Menu to choose lanaguge to translate
+void menu(){
+  print("1.English");
+  print("2.Khmer");
+  print('3.Chiness');
+  switch (int.parse(chooseMenu())) {
+      case 1:
+        print("English");
+        break;
+      default:
+    }
+}
+String chooseMenu(){
+  stdout.write("Choose number: ");
+  String choosedMeun = stdin.readLineSync() ?? " ";
+  return choosedMeun;
 }
 
 // Learn about factory fromMap
