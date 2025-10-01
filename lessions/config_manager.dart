@@ -24,6 +24,7 @@ class ConfigManager {
 
     void translate(String key){
         print("translate is called");
+
         var result2 = languages.entries.where((keyTran){
             return keyTran.key == key;
         });

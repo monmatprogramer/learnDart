@@ -49,8 +49,19 @@ void menu(){
   switch (int.parse(chooseMenu())) {
       case 1:
         print("English");
+        ConfigManager.instance.translate('en');
         break;
+      case 2:
+        print("khmer");
+        ConfigManager.instance.translate('km');
+      break;
+      case 3:
+        print('chiness');
+        ConfigManager.instance.translate('zh');
+      break;
       default:
+      print("invalid number");
+
     }
 }
 String chooseMenu(){
