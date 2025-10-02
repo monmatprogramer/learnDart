@@ -6,6 +6,7 @@ import 'lessions/book.dart';
 import 'lessions/car.dart';
 import 'lessions/config_manager.dart';
 import 'lessions/engine.dart';
+import 'lessions/login_result.dart';
 import 'lessions/music.dart';
 import 'lessions/order.dart';
 import 'lessions/person.dart';
@@ -38,8 +39,9 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  final String message = await downloadFile();
-  print(message);
+  LoginResult loginResult = await login('admin','1234');
+  print(loginResult.success);
+  print(loginResult.message);
 }
 //Learn about Future return custom type
 Future<UploadResult> uploadProfileImageMobile() async{
@@ -51,6 +53,20 @@ Future<String> downloadFile()async{
   // Wait 3 seconds
   await Future.delayed(const Duration(seconds: 3));
   return "File download successfully";
+}
+// Exericse 2: Simulate login
+Future<LoginResult> login(String useranem, String password) async{
+  // wait for 2 seconds
+  await Future.delayed(const Duration(seconds: 2));
+  //username and password for logining
+  //username: admin
+  //password: 123
+  if(useranem == "admin" && password == "123")
+  {
+    return LoginResult(success: true, message: "Login successful" );
+  }
+  // For wrong username or password
+  return LoginResult(success: false, message: "Try login again");
 }
 
 
