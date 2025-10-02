@@ -68,7 +68,11 @@ void main() async {
 
 
   CheckoutService checkoutService = CheckoutService(carts: [item1,item2, item3, item4, item5, item6, item7, item8, item9,item10]);
-  checkoutService.test();
+  CheckoutService checkoutService2 = CheckoutService(carts: []);
+  checkoutService.totalPrice();
+  checkoutService2.totalPrice();
+
+
 
 }
 //Learn about Future return custom type
