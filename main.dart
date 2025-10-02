@@ -4,8 +4,10 @@ import 'lessions/address.dart';
 import 'lessions/author.dart';
 import 'lessions/book.dart';
 import 'lessions/car.dart';
+import 'lessions/checkout_service.dart';
 import 'lessions/config_manager.dart';
 import 'lessions/engine.dart';
+import 'lessions/item.dart';
 import 'lessions/login_result.dart';
 import 'lessions/music.dart';
 import 'lessions/order.dart';
@@ -15,7 +17,21 @@ import 'lessions/product.dart';
 import 'lessions/school.dart';
 import 'lessions/student.dart';
 import 'lessions/upload_result.dart';
+import 'lessions/weather_report.dart';
 
+//List of item
+List<Map<String, dynamic>> items = [
+  {"name": "Laptop", "price": 999.99},
+  {"name": "Smartphone", "price": 699.50},
+  {"name": "Coffee Maker", "price": 89.95},
+  {"name": "Headphones", "price": 149.99},
+  {"name": "Desk Chair", "price": 199.00},
+  {"name": "Water Bottle", "price": 24.99},
+  {"name": "Backpack", "price": 75.50},
+  {"name": "Tablet", "price": 329.99},
+  {"name": "Running Shoes", "price": 129.95},
+  {"name": "Book", "price": 15.75},
+];
 
 //Initialized constructor
 class Error {
@@ -39,9 +55,21 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  LoginResult loginResult = await login('admin','1234');
-  print(loginResult.success);
-  print(loginResult.message);
+  Item item1 = Item(name: "Laptop", price: 999.99);
+  Item item2 = Item(name: "Smartphone", price: 699.50);
+  Item item3 = Item(name: "Coffee Maker", price: 89.95);
+  Item item4 = Item(name: "Headphones", price: 149.99);
+  Item item5 = Item(name: "Desk Chair", price: 199.00);
+  Item item6 = Item(name: "Water Bottle", price: 24.99);
+  Item item7 = Item(name: "Backpack", price: 75.50);
+  Item item8 = Item(name: "Tablet", price: 329.99);
+  Item item9 = Item(name: "Running Shoes", price: 129.95);
+  Item item10 = Item(name: "Book", price: 15.75);
+
+
+  CheckoutService checkoutService = CheckoutService(carts: [item1,item2, item3, item4, item5, item6, item7, item8, item9,item10]);
+  checkoutService.test();
+
 }
 //Learn about Future return custom type
 Future<UploadResult> uploadProfileImageMobile() async{
@@ -68,6 +96,14 @@ Future<LoginResult> login(String useranem, String password) async{
   // For wrong username or password
   return LoginResult(success: false, message: "Try login again");
 }
+
+//Exercise 3: Weather Fether
+Future<WeatherReport> getWeather(String city) async{
+  await Future.delayed(const Duration(seconds: 2));
+  return WeatherReport(city: city, temperature: 32);
+}
+
+// Exercise 4: Online Shopping Checkout
 
 
 
