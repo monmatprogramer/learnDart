@@ -13,6 +13,7 @@ import 'lessions/monk.dart';
 import 'lessions/product.dart';
 import 'lessions/school.dart';
 import 'lessions/student.dart';
+import 'lessions/upload_result.dart';
 
 
 //Initialized constructor
@@ -36,10 +37,18 @@ int sum(dynamic num1, dynamic num2) {
   }
 }
 
-void main() {
-  menu();
-  // ConfigManager.instance.translate("zh");
+void main() async {
+  UploadResult uploadResult = await uploadProfileImageMobile();
+  print(uploadResult.message);
 }
+//Learn about Future return custom type
+Future<UploadResult> uploadProfileImageMobile() async{
+  await Future.delayed(const Duration(seconds: 2));
+  return UploadResult(success: true, message: "Upload completed successful", imageUrl: " https://example.com/profile.jpg");
+}
+
+
+
 // Learn singleton
 // 1. Menu to choose lanaguge to translate
 void menu(){
