@@ -38,13 +38,19 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  UploadResult uploadResult = await uploadProfileImageMobile();
-  print(uploadResult.message);
+  final String message = await downloadFile();
+  print(message);
 }
 //Learn about Future return custom type
 Future<UploadResult> uploadProfileImageMobile() async{
   await Future.delayed(const Duration(seconds: 2));
   return UploadResult(success: true, message: "Upload completed successful", imageUrl: " https://example.com/profile.jpg");
+}
+// Exercise 1: Simulate a File Download
+Future<String> downloadFile()async{
+  // Wait 3 seconds
+  await Future.delayed(const Duration(seconds: 3));
+  return "File download successfully";
 }
 
 
