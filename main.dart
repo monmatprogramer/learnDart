@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'dart:math';
 import 'lessions/address.dart';
 import 'lessions/author.dart';
 import 'lessions/book.dart';
@@ -58,10 +59,56 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  EmailSendingReport emailSendingReport = await emailSender("re.gmail.com","se@gmail.com");
-  print(emailSendingReport.success);
-  print(emailSendingReport.message);
+  fetchUserData(fetching);
 }
+// Function as param
+// 1. Basic
+void greet(void Function(String) func ){
+  func("mon");
+}
+void name(String fn){
+  print("Hello $fn");
+}
+// 2. The customizable logger
+void logMessage(String message, void Function(String) func){
+  func(message);
+}
+void consoleLogger(String message){
+  print("[INFO] $message");
+}
+void fileLogger(String message){
+  print("[FILE] $message..");
+}
+//3. Fetch user data
+Future<void> fetchUserData(bool Function() fetchResult) async{
+  print("Fetching...");
+  await Future.delayed(const Duration(seconds: 1));
+  bool resultFetching = fetchResult();
+  if(resultFetching){
+    onSuccess();
+  }else{
+    onError();
+  }
+}
+bool fetching(){
+  return false;
+}
+void onSuccess(){
+  Map<String, dynamic> data = {
+    'name': 'Mon Mat',
+    'id': 123,
+  };
+  print(data);
+}
+void onError(){
+  print("Network timeout");
+}
+
+// 3. Process List
+void processList(List<int> myList, void Function() func){
+
+}
+
 
 //Learn about Future return custom type
 Future<UploadResult> uploadProfileImageMobile() async{
@@ -182,7 +229,6 @@ void callMusic(){
 }
 
 // return chain result
-String name() => giveName();
 String giveName () => "Mon Mat";
 
 
