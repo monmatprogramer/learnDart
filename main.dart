@@ -7,6 +7,7 @@ import 'lessions/booking_result.dart';
 import 'lessions/car.dart';
 import 'lessions/checkout_service.dart';
 import 'lessions/config_manager.dart';
+import 'lessions/email_sending_report.dart';
 import 'lessions/engine.dart';
 import 'lessions/item.dart';
 import 'lessions/login_result.dart';
@@ -57,9 +58,9 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-
-BookingResult bookingResult = await booking('0002');
-print(bookingResult.success);
+  EmailSendingReport emailSendingReport = await emailSender("re.gmail.com","se@gmail.com");
+  print(emailSendingReport.success);
+  print(emailSendingReport.message);
 }
 
 //Learn about Future return custom type
@@ -126,7 +127,14 @@ Future<BookingResult> booking(String seatId) async{
   }
   return BookingResult(success: false, message: "Booking failed");
 }
-
+// Exercise 6: Email sender
+Future<EmailSendingReport> emailSender(String receipt, String sender) async{
+  if(!receipt.contains("@") || !sender.contains("@")) {
+    return EmailSendingReport(success: false, message: "invalid email");
+  }
+  await Future.delayed(const Duration(seconds: 2));
+  return EmailSendingReport(success: true, message: "sent");
+}
 
 // Learn singleton
 // 1. Menu to choose lanaguge to translate
