@@ -11,15 +11,15 @@ class CheckoutService {
   }
 
   //Total price
-  void totalPrice() {
+  String totalPrice() {
     if (carts.isNotEmpty) {
       double sumResult = 0.0;
       carts.forEach((cart) {
         sumResult = sumResult + cart.price;
       });
-      print("Total price: ${sumResult.round()}");
+      return "Total price: ${sumResult.round()}";
     }else{
-        print("Sorry! you don't have produces to calulate.");
+        return "Sorry! you don't have produces to calulate.";
     }
   }
 }

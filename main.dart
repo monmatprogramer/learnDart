@@ -3,6 +3,7 @@ import 'dart:io';
 import 'lessions/address.dart';
 import 'lessions/author.dart';
 import 'lessions/book.dart';
+import 'lessions/booking_result.dart';
 import 'lessions/car.dart';
 import 'lessions/checkout_service.dart';
 import 'lessions/config_manager.dart';
@@ -15,6 +16,7 @@ import 'lessions/person.dart';
 import 'lessions/monk.dart';
 import 'lessions/product.dart';
 import 'lessions/school.dart';
+import 'lessions/seat.dart';
 import 'lessions/student.dart';
 import 'lessions/upload_result.dart';
 import 'lessions/weather_report.dart';
@@ -55,26 +57,11 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  Item item1 = Item(name: "Laptop", price: 999.99);
-  Item item2 = Item(name: "Smartphone", price: 699.50);
-  Item item3 = Item(name: "Coffee Maker", price: 89.95);
-  Item item4 = Item(name: "Headphones", price: 149.99);
-  Item item5 = Item(name: "Desk Chair", price: 199.00);
-  Item item6 = Item(name: "Water Bottle", price: 24.99);
-  Item item7 = Item(name: "Backpack", price: 75.50);
-  Item item8 = Item(name: "Tablet", price: 329.99);
-  Item item9 = Item(name: "Running Shoes", price: 129.95);
-  Item item10 = Item(name: "Book", price: 15.75);
 
-
-  CheckoutService checkoutService = CheckoutService(carts: [item1,item2, item3, item4, item5, item6, item7, item8, item9,item10]);
-  CheckoutService checkoutService2 = CheckoutService(carts: []);
-  checkoutService.totalPrice();
-  checkoutService2.totalPrice();
-
-
-
+BookingResult bookingResult = await booking('0002');
+print(bookingResult.success);
 }
+
 //Learn about Future return custom type
 Future<UploadResult> uploadProfileImageMobile() async{
   await Future.delayed(const Duration(seconds: 2));
@@ -108,7 +95,37 @@ Future<WeatherReport> getWeather(String city) async{
 }
 
 // Exercise 4: Online Shopping Checkout
+Future<String> checkout() async{
+  Item item1 = Item(name: "Laptop", price: 999.99);
+  Item item2 = Item(name: "Smartphone", price: 699.50);
+  Item item3 = Item(name: "Coffee Maker", price: 89.95);
+  Item item4 = Item(name: "Headphones", price: 149.99);
+  Item item5 = Item(name: "Desk Chair", price: 199.00);
+  Item item6 = Item(name: "Water Bottle", price: 24.99);
+  Item item7 = Item(name: "Backpack", price: 75.50);
+  Item item8 = Item(name: "Tablet", price: 329.99);
+  Item item9 = Item(name: "Running Shoes", price: 129.95);
+  Item item10 = Item(name: "Book", price: 15.75);
 
+  await Future.delayed(const Duration(seconds: 2));
+
+  CheckoutService checkoutService = CheckoutService(carts: [item1,item2, item3, item4, item5, item6, item7, item8, item9,item10]);
+  // CheckoutService checkoutService2 = CheckoutService(carts: []);
+  return checkoutService.totalPrice();
+  //checkoutService2.totalPrice();
+
+}
+
+// Exercise 5: Movie Tiket booking
+Future<BookingResult> booking(String seatId) async{
+  Seat seat = Seat(seatId: "0001", rowNumber: 1, isAvailable: false);
+
+  await Future.delayed(const Duration(seconds: 3));
+  if(seatId == seat.seatId){
+    return BookingResult(success: true, message: "Booking successful");
+  }
+  return BookingResult(success: false, message: "Booking failed");
+}
 
 
 // Learn singleton
