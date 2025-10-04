@@ -59,17 +59,37 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  // processList([1,2,3,4],printSquare);
-  // processList([1,2,3,4],printIfEven);
+    fetchData(helloWorld);
+
 }
 
 //---StringBuffer and normal String----
 // 1. String Buffer
 void learnStringBuffer() {
-  final sb = StringBuffer();
+  final StringBuffer sb = StringBuffer();
+  sb.write("Mr. A");
+  sb.write("Mr. B");
+  sb.write("Mr. C");
+  print(sb);
+  print(sb.toString());
+  print(sb.length);
   print(sb.runtimeType);
+  print(identityHashCode(sb));
 }
 // 2. Normal String
+void learnNormalString(){
+  String sb = "";
+  sb = "Mr. A";
+  sb+= "Mr. B";
+  sb+= "Mr. C";
+  print(sb);
+  print(sb.toString());
+  print(sb.length);
+  print(sb.runtimeType);
+  print(identityHashCode(sb));
+}
+
+
 
 // Function as param
 // 1. Basic
@@ -126,17 +146,19 @@ void processList(List<int> myList, void Function(List<int>) func) {
 
 void printSquare(List<int> list) {
   final sb = StringBuffer();
-  print("👉 sb $sb");
-  // CVBMN<Crint("squares of $item is ${item*item}");
-  // });
+  for(int i = 0; i < list.length; i++){
+    print("👉 i : ${list[i]}");
+    sb.writeln("This square number of $i is ${i*i} ");
+  }
+  print(sb.toString());
 }
 
 void printIfEven(List<int> list) {
-  list.forEach((item) {
-    if (item % 2 == 0) {
-      print("This is even number: $item");
+  for(int i = 0; i< list.length; i++){
+    if(i % 2 == 0){
+      print("This is $i even number");
     }
-  });
+  }
 }
 
 //For debug print
@@ -144,7 +166,16 @@ void debugPrint(String message, String value) {
   print("👉 $message : $value");
 }
 
-//Learn about Future return custom type
+Future<void> fetchData(Future<void> Function(String) callback) async{
+  await Future.delayed(const Duration(seconds: 2));
+  callback("Callback function");
+}
+Future<void> helloWorld(String message) async{
+  await Future.delayed(const Duration(seconds: 2));
+  print("hello world and message: $message");
+}
+
+//------Learn about Future return custom type---------
 Future<UploadResult> uploadProfileImageMobile() async {
   await Future.delayed(const Duration(seconds: 2));
   return UploadResult(
