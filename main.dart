@@ -59,91 +59,130 @@ int sum(dynamic num1, dynamic num2) {
 }
 
 void main() async {
-  fetchUserData(fetching);
+  // processList([1,2,3,4],printSquare);
+  // processList([1,2,3,4],printIfEven);
 }
+
+//---StringBuffer and normal String----
+// 1. String Buffer
+void learnStringBuffer() {
+  final sb = StringBuffer();
+  print(sb.runtimeType);
+}
+// 2. Normal String
+
 // Function as param
 // 1. Basic
-void greet(void Function(String) func ){
+void greet(void Function(String) func) {
   func("mon");
 }
-void name(String fn){
+
+void name(String fn) {
   print("Hello $fn");
 }
+
 // 2. The customizable logger
-void logMessage(String message, void Function(String) func){
+void logMessage(String message, void Function(String) func) {
   func(message);
 }
-void consoleLogger(String message){
+
+void consoleLogger(String message) {
   print("[INFO] $message");
 }
-void fileLogger(String message){
+
+void fileLogger(String message) {
   print("[FILE] $message..");
 }
+
 //3. Fetch user data
-Future<void> fetchUserData(bool Function() fetchResult) async{
+Future<void> fetchUserData(bool Function() fetchResult) async {
   print("Fetching...");
   await Future.delayed(const Duration(seconds: 1));
   bool resultFetching = fetchResult();
-  if(resultFetching){
+  if (resultFetching) {
     onSuccess();
-  }else{
+  } else {
     onError();
   }
 }
-bool fetching(){
+
+bool fetching() {
   return false;
 }
-void onSuccess(){
-  Map<String, dynamic> data = {
-    'name': 'Mon Mat',
-    'id': 123,
-  };
+
+void onSuccess() {
+  Map<String, dynamic> data = {'name': 'Mon Mat', 'id': 123};
   print(data);
 }
-void onError(){
+
+void onError() {
   print("Network timeout");
 }
 
 // 3. Process List
-void processList(List<int> myList, void Function() func){
-
+void processList(List<int> myList, void Function(List<int>) func) {
+  func(myList);
 }
 
+void printSquare(List<int> list) {
+  final sb = StringBuffer();
+  print("👉 sb $sb");
+  // CVBMN<Crint("squares of $item is ${item*item}");
+  // });
+}
+
+void printIfEven(List<int> list) {
+  list.forEach((item) {
+    if (item % 2 == 0) {
+      print("This is even number: $item");
+    }
+  });
+}
+
+//For debug print
+void debugPrint(String message, String value) {
+  print("👉 $message : $value");
+}
 
 //Learn about Future return custom type
-Future<UploadResult> uploadProfileImageMobile() async{
+Future<UploadResult> uploadProfileImageMobile() async {
   await Future.delayed(const Duration(seconds: 2));
-  return UploadResult(success: true, message: "Upload completed successful", imageUrl: " https://example.com/profile.jpg");
+  return UploadResult(
+    success: true,
+    message: "Upload completed successful",
+    imageUrl: " https://example.com/profile.jpg",
+  );
 }
+
 // Exercise 1: Simulate a File Download
-Future<String> downloadFile()async{
+Future<String> downloadFile() async {
   // Wait 3 seconds
   await Future.delayed(const Duration(seconds: 3));
   return "File download successfully";
 }
+
 // Exericse 2: Simulate login
-Future<LoginResult> login(String useranem, String password) async{
+Future<LoginResult> login(String useranem, String password) async {
   // wait for 2 seconds
   await Future.delayed(const Duration(seconds: 2));
   //username and password for logining
   //username: admin
   //password: 123
-  if(useranem == "admin" && password == "123")
-  {
-    return LoginResult(success: true, message: "Login successful" );
+  if (useranem == "admin" && password == "123") {
+    return LoginResult(success: true, message: "Login successful");
   }
   // For wrong username or password
   return LoginResult(success: false, message: "Try login again");
 }
 
 //Exercise 3: Weather Fether
-Future<WeatherReport> getWeather(String city) async{
+Future<WeatherReport> getWeather(String city) async {
   await Future.delayed(const Duration(seconds: 2));
   return WeatherReport(city: city, temperature: 32);
 }
 
 // Exercise 4: Online Shopping Checkout
-Future<String> checkout() async{
+Future<String> checkout() async {
   Item item1 = Item(name: "Laptop", price: 999.99);
   Item item2 = Item(name: "Smartphone", price: 699.50);
   Item item3 = Item(name: "Coffee Maker", price: 89.95);
@@ -157,26 +196,39 @@ Future<String> checkout() async{
 
   await Future.delayed(const Duration(seconds: 2));
 
-  CheckoutService checkoutService = CheckoutService(carts: [item1,item2, item3, item4, item5, item6, item7, item8, item9,item10]);
+  CheckoutService checkoutService = CheckoutService(
+    carts: [
+      item1,
+      item2,
+      item3,
+      item4,
+      item5,
+      item6,
+      item7,
+      item8,
+      item9,
+      item10,
+    ],
+  );
   // CheckoutService checkoutService2 = CheckoutService(carts: []);
   return checkoutService.totalPrice();
   //checkoutService2.totalPrice();
-
 }
 
 // Exercise 5: Movie Tiket booking
-Future<BookingResult> booking(String seatId) async{
+Future<BookingResult> booking(String seatId) async {
   Seat seat = Seat(seatId: "0001", rowNumber: 1, isAvailable: false);
 
   await Future.delayed(const Duration(seconds: 3));
-  if(seatId == seat.seatId){
+  if (seatId == seat.seatId) {
     return BookingResult(success: true, message: "Booking successful");
   }
   return BookingResult(success: false, message: "Booking failed");
 }
+
 // Exercise 6: Email sender
-Future<EmailSendingReport> emailSender(String receipt, String sender) async{
-  if(!receipt.contains("@") || !sender.contains("@")) {
+Future<EmailSendingReport> emailSender(String receipt, String sender) async {
+  if (!receipt.contains("@") || !sender.contains("@")) {
     return EmailSendingReport(success: false, message: "invalid email");
   }
   await Future.delayed(const Duration(seconds: 2));
@@ -185,43 +237,39 @@ Future<EmailSendingReport> emailSender(String receipt, String sender) async{
 
 // Learn singleton
 // 1. Menu to choose lanaguge to translate
-void menu(){
+void menu() {
   print("1.English");
   print("2.Khmer");
   print('3.Chiness');
   switch (int.parse(chooseMenu())) {
-      case 1:
-        print("English");
-        ConfigManager.instance.translate('en');
-        break;
-      case 2:
-        print("khmer");
-        ConfigManager.instance.translate('km');
+    case 1:
+      print("English");
+      ConfigManager.instance.translate('en');
       break;
-      case 3:
-        print('chiness');
-        ConfigManager.instance.translate('zh');
+    case 2:
+      print("khmer");
+      ConfigManager.instance.translate('km');
       break;
-      default:
+    case 3:
+      print('chiness');
+      ConfigManager.instance.translate('zh');
+      break;
+    default:
       print("invalid number");
-
-    }
+  }
 }
-String chooseMenu(){
+
+String chooseMenu() {
   stdout.write("Choose number: ");
   String choosedMeun = stdin.readLineSync() ?? " ";
   return choosedMeun;
 }
 
-
 // Learn about factory fromMap
 // callMusic class
-void callMusic(){
+void callMusic() {
   // create a map
-  const Map<String,dynamic> musicA = {
-    'title': 'MusicA',
-    'singBy': 'singer A'
-  };
+  const Map<String, dynamic> musicA = {'title': 'MusicA', 'singBy': 'singer A'};
   // create object music
   Music music = Music.fromMap(musicA);
   print(music.title);
@@ -229,19 +277,14 @@ void callMusic(){
 }
 
 // return chain result
-String giveName () => "Mon Mat";
-
+String giveName() => "Mon Mat";
 
 //Practice to use Future
-Future<void> getCpuUsage() async{
-  final result = await Process.run(
-    'powershell',
-    [
-      '-command',
-      "(Get-Counter '\\Processor(_Total)\\% Processor Time').CounterSamples.CookedValue"
-    ],
-    runInShell: true,
-  );
+Future<void> getCpuUsage() async {
+  final result = await Process.run('powershell', [
+    '-command',
+    "(Get-Counter '\\Processor(_Total)\\% Processor Time').CounterSamples.CookedValue",
+  ], runInShell: true);
 
   print(result.stdout);
   final value = result.stdout.toString().trim();
@@ -249,208 +292,225 @@ Future<void> getCpuUsage() async{
   print(double.tryParse(value).toString());
 }
 
-void cookNoodles(bool stoveOnOrOff){
+void cookNoodles(bool stoveOnOrOff) {
   bool stoveOn = stoveOnOrOff;
 
-  if(!stoveOn){
+  if (!stoveOn) {
     throw 'Stove is OFF, cannot cook noodles!';
   }
 
   print("Cooking noodles...");
 }
+
 //--- Method chaning -------------
 // 1. FLUTTER -> FLU
-void captital2Letters(){
+void captital2Letters() {
   final String letter = 'flutter';
-  print(letter.toUpperCase().substring(0,3));
+  print(letter.toUpperCase().substring(0, 3));
 }
+
 // 2. Not timeout
-Future<String> slowOk() async{
+Future<String> slowOk() async {
   print('A1: slowOk started');
   await Future.delayed(const Duration(seconds: 1));
   print('A2: slowOk finishing');
   return 'OK';
 }
-Future<void> demoNoTimeout() async{
+
+Future<void> demoNoTimeout() async {
   print('A0: demoNoTimeOut begin');
   final result = await slowOk().timeout(const Duration(seconds: 3));
   print('A3: got result = $result');
   print('A4: demoNoTimeout end');
 }
-Future<String> verySlow() async{
+
+Future<String> verySlow() async {
   print('B1: veryslow started');
   await Future.delayed(const Duration(seconds: 1));
   print('B2: VerySlow finishing');
   return 'DONE';
 }
-Future<void> demoTimeoutThrow() async{
+
+Future<void> demoTimeoutThrow() async {
   print('B0: demoTimeoutThrow begin');
-  try{
-      final value = await verySlow().timeout(
-          const Duration(seconds: 2),
-          onTimeout: () => throw Exception('Timed out!'),
-        );
-      print('B3: got value = $value');
-    }catch(e){
-      print('B4: caught error = $e');
-    }finally{
-      print('B5: demoTimeoutThrow end');
-    }
+  try {
+    final value = await verySlow().timeout(
+      const Duration(seconds: 2),
+      onTimeout: () => throw Exception('Timed out!'),
+    );
+    print('B3: got value = $value');
+  } catch (e) {
+    print('B4: caught error = $e');
+  } finally {
+    print('B5: demoTimeoutThrow end');
+  }
 }
+
 //--- Exercies for practicing Future and timeout()
 // 1. login
-Future<String> requestLogin() async{
+Future<String> requestLogin() async {
   await Future.delayed(const Duration(seconds: 3));
   return "Logged in successful";
 }
-Future<void> demoRequestLogin() async{
-  try{
-      print('It is starting login...');
-      final result = await requestLogin().timeout(
-          const Duration(seconds:2),
-          onTimeout: () => throw Exception('Server too slow, please try again'),
-        );
-      print(result);
-    }catch(e){
-      print('💥Ops: $e');
-    }finally{
-      print("Finish requesting.");
-    }
+
+Future<void> demoRequestLogin() async {
+  try {
+    print('It is starting login...');
+    final result = await requestLogin().timeout(
+      const Duration(seconds: 2),
+      onTimeout: () => throw Exception('Server too slow, please try again'),
+    );
+    print(result);
+  } catch (e) {
+    print('💥Ops: $e');
+  } finally {
+    print("Finish requesting.");
+  }
 }
+
 // 2. Download
-Future<String> requestDownload()async{
+Future<String> requestDownload() async {
   print('Start download...');
   await Future.delayed(const Duration(seconds: 6));
   return "Download successful";
 }
-Future<void> demoDownload() async{
-  try{
-      final result = await requestDownload().timeout(
-        const Duration(seconds: 5),
-        onTimeout: () => throw Exception('Download failed, please check your internet'),
-      );
-      print(result);
-    }catch(e){
-      print('💥Ops: $e');
-    }finally{
-      print('Finish download.');
-    }
+
+Future<void> demoDownload() async {
+  try {
+    final result = await requestDownload().timeout(
+      const Duration(seconds: 5),
+      onTimeout: () =>
+          throw Exception('Download failed, please check your internet'),
+    );
+    print(result);
+  } catch (e) {
+    print('💥Ops: $e');
+  } finally {
+    print('Finish download.');
+  }
 }
+
 // 3. Turn on or off light
-Future<String> requestBulb({bool isTurnOn = false}) async{
+Future<String> requestBulb({bool isTurnOn = false}) async {
   print('Start turn $isTurnOn ...');
   await Future.delayed(const Duration(seconds: 3));
   return "Your bulb is $isTurnOn";
 }
-Future<void> demoRequestBulb() async{
-  try{
+
+Future<void> demoRequestBulb() async {
+  try {
     final result = await requestBulb(isTurnOn: true).timeout(
       const Duration(seconds: 1),
       onTimeout: () => throw Exception('Bulb not responding, try again'),
     );
     print(result);
-  }catch(e){
+  } catch (e) {
     print('💥Ops: $e');
-  }finally{
+  } finally {
     print("Finish operation");
   }
 }
+
 // 4. payment
-Future<String> requestPayment() async{
+Future<String> requestPayment() async {
   print('Request payment...');
   await Future.delayed(const Duration(seconds: 10));
   return "payment success message";
 }
-Future<void> demoRquestPayment() async{
-  try{
+
+Future<void> demoRquestPayment() async {
+  try {
     final String result = await requestPayment().timeout(
       const Duration(seconds: 5),
-      onTimeout: () => throw Exception('Payment taking too long, please try again or contact support'),
+      onTimeout: () => throw Exception(
+        'Payment taking too long, please try again or contact support',
+      ),
     );
     print(result);
-  }catch(e){
-
-
+  } catch (e) {
     print('💥Ops: $e');
-  }finally{
+  } finally {
     print("Finish operation");
   }
 }
 // 5. microservices
-  //Order service
+//Order service
 
-  bool isCloseOrderService(bool isClosed){
-    if (isClosed) print("Order service is closed");
-    else print('Order service is not closed');
-    return isClosed;
-  }
+bool isCloseOrderService(bool isClosed) {
+  if (isClosed)
+    print("Order service is closed");
+  else
+    print('Order service is not closed');
+  return isClosed;
+}
 
-  Future<void> demoOrderService(bool isOrderClosed) async{
-    if(isCloseOrderService(isOrderClosed)) await demoPaymentService();
-  }
-  // Payment service
-  Future<bool> requestPaymentService() async{
-    print('Request payment...');
-    await Future.delayed(const Duration(seconds: 5));
-    return true;
-  }
+Future<void> demoOrderService(bool isOrderClosed) async {
+  if (isCloseOrderService(isOrderClosed)) await demoPaymentService();
+}
 
-  Future<void> demoPaymentService() async{
-    bool isSuccess = false;
-    try{
-        final bool result = await requestPaymentService().timeout(
-          const Duration(seconds: 3),
-          onTimeout: () => throw Exception('Payment system unavailable'),
-        );
-        isSuccess = result;
-        await printService();
-        print('order is prcessed, receipt printed');
-      }catch(e){
-        isSuccess = false;
-        print('⚠️ $e');
-      }finally{
-        if(isSuccess) print('😀 Thank you!');
-        else print('😥 Failure');
-      }
-  }
+// Payment service
+Future<bool> requestPaymentService() async {
+  print('Request payment...');
+  await Future.delayed(const Duration(seconds: 5));
+  return true;
+}
 
-  //Print Service
-  Future<String> requestPrintService() async{
-    print('Please wait, we are printting payment for you...');
-    await Future.delayed(const Duration(seconds: 1));
-    return "This is your receipt";
+Future<void> demoPaymentService() async {
+  bool isSuccess = false;
+  try {
+    final bool result = await requestPaymentService().timeout(
+      const Duration(seconds: 3),
+      onTimeout: () => throw Exception('Payment system unavailable'),
+    );
+    isSuccess = result;
+    await printService();
+    print('order is prcessed, receipt printed');
+  } catch (e) {
+    isSuccess = false;
+    print('⚠️ $e');
+  } finally {
+    if (isSuccess)
+      print('😀 Thank you!');
+    else
+      print('😥 Failure');
   }
+}
 
-  Future<void> printService() async{
-    final result = await requestPrintService();
-    print(result);
-  }
+//Print Service
+Future<String> requestPrintService() async {
+  print('Please wait, we are printting payment for you...');
+  await Future.delayed(const Duration(seconds: 1));
+  return "This is your receipt";
+}
+
+Future<void> printService() async {
+  final result = await requestPrintService();
+  print(result);
+}
 
 //---- Exerices for throw error ---
 // 1. divide number
-void divide(int a, int b){
-  if(b <= 0) throw 'Cannot divide by zero';
+void divide(int a, int b) {
+  if (b <= 0) throw 'Cannot divide by zero';
 }
 
 // 2. Check age
-void checkAge(int age){
-  if(age < 15) throw Exception('You are too young!');
+void checkAge(int age) {
+  if (age < 15) throw Exception('You are too young!');
   print('Welcome!');
 }
 
 // 3. Timeout newtwork
-Future<void> timeout(int duration, Function call) async{
-  if(duration > 3) throw "Timeout.";
+Future<void> timeout(int duration, Function call) async {
+  if (duration > 3) throw "Timeout.";
   await Future.delayed(Duration(seconds: duration));
   call();
 }
 
-
-
 // Start to learn streaming
 // 1. simple number stream
-Stream<int> numberStream() async*{
-  for(int i = 1; i<= 3; i++){
+Stream<int> numberStream() async* {
+  for (int i = 1; i <= 3; i++) {
     await Future.delayed(const Duration(seconds: 1));
     yield i;
   }
@@ -458,23 +518,21 @@ Stream<int> numberStream() async*{
 
 // Practice Stream exercies
 // 1. Real-time progress bar for file download
-Stream<int> progressDownload() async*{
-  for(int i = 10; i<= 100; i+=10){
+Stream<int> progressDownload() async* {
+  for (int i = 10; i <= 100; i += 10) {
     await Future.delayed(const Duration(seconds: 1));
     yield i;
-
   }
   print("File download complete");
 }
 
 // Learn about 'cascade operations'
 // * chain operations on the same object
-class Car{
+class Car {
   String? model;
   String? make;
 
-  void getInfo()
-  {
+  void getInfo() {
     print('''
       model: $model,
       make: $make,
@@ -482,38 +540,40 @@ class Car{
   }
 }
 
-void callCar(){
+void callCar() {
   Car? car = null;
   car
-  ?..model = "Camry"
-  ..make = "Toyota"
-  ..getInfo();
+    ?..model = "Camry"
+    ..make = "Toyota"
+    ..getInfo();
 }
 
-void getCascadeCollection(){
+void getCascadeCollection() {
   var list = []
-  ..add('Apple')
-  ..add('Banana')
-  ..add('Orange');
+    ..add('Apple')
+    ..add('Banana')
+    ..add('Orange');
   list.forEach((l) => print("List: $l"));
 }
+
 // Practice about cascading
-void callMonk(){
+void callMonk() {
   final monk = Monk();
   monk.name = "MonMat";
   monk.state = true;
   monk.introduce();
 }
+
 // Practice class as param other class
 // 1. Person has address
-void callPerson(){
+void callPerson() {
   Address address = Address(city: "Phnome Penh", country: "Cambodia");
   Person person = Person(name: "Mon Mat", age: 12, address: address);
   person.showInfo();
 }
 
 // 2. Car has engine
-void callCarType(){
+void callCarType() {
   CarEngine car = CarEngine();
   Engine engine = Engine(type: "Petrol");
   Engine engine2 = Engine(type: "Electric");
@@ -521,18 +581,17 @@ void callCarType(){
   car.start(engine2);
 }
 
-
 // 3. Create library system
-void callBook(){
+void callBook() {
   Author author = Author(name: "Georage Orwell", country: "United Kingdom");
-  Book book = Book(title: "1998",author: author);
+  Book book = Book(title: "1998", author: author);
   book.showBookDetails();
 }
 
 // 4. create enrollment
-void callStudent(){
+void callStudent() {
   //Create school object
-  School school = School(name: "SET University",location: "Phnom Penh");
+  School school = School(name: "SET University", location: "Phnom Penh");
   //Create object of student
   Student student = Student(name: "Nak");
 
@@ -541,10 +600,10 @@ void callStudent(){
 }
 
 // 5. Call total price of produce
-void calltTotalPrduce(){
+void calltTotalPrduce() {
   Product produce1 = Product(name: "Mac 2019", price: 2000);
   Product produce2 = Product(name: "iPhone 7", price: 1100);
   Product product3 = Product(name: "Nokia N70", price: 50);
-  Order order1 = Order(products: [produce1,produce2,product3]);
+  Order order1 = Order(products: [produce1, produce2, product3]);
   order1.showProduce();
 }
